@@ -36,6 +36,12 @@ module.exports = function (grunt) {
       }
     },
 
+    rev: {
+      files: {
+        src: ['build/**/*.{js,css,png,jpg}']
+      }
+    },
+
     watch: {
       options: {
         livereload: true
@@ -53,7 +59,7 @@ module.exports = function (grunt) {
 
     usemin: {
       html: ['build/*.html'],
-      css: ['css/*.css'],
+      css: ['styles/*.css'],
       options: {
         dirs: ['build']
       }
@@ -80,6 +86,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-rev');
 
   grunt.registerTask('build', [
     'clean:build',
@@ -87,9 +94,10 @@ module.exports = function (grunt) {
     'coffee',
     'useminPrepare',
     'concat',
-    'copy',
-    'uglify',
     'cssmin',
+    'uglify',
+    'copy',
+    'rev',
     'usemin'
   ]);
 
