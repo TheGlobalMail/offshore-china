@@ -248,7 +248,7 @@ section {
   font-size: 14px;
   padding: 7px 0;
   padding-left: 38px;
-  background: url(/images/tgm-logo-30px.png) left center no-repeat;
+  background: url(../images/tgm-logo-30px.png) left center no-repeat;
   text-align: right;
   font-weight: 500;
 }
@@ -257,3 +257,83 @@ section {
   text-decoration: underline;
 }
 /* viz-specific things below */
+div#main {
+  margin: 0 auto;
+  max-width: 960px;
+}
+div#chart {
+  margin: 0;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #bfbfbf;
+  shape-rendering: crispEdges;
+}
+.y.axis line {
+  stroke: #cccccc;
+  stroke-dasharray: 5 5;
+}
+.axis text {
+  fill: #4d4d4d;
+  font-weight: 600;
+  stroke: none;
+}
+.y.axis text {
+  font-size: 14px;
+  font-style: italic;
+}
+.x.axis text {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.stack-rect {
+  shape-rendering: crispEdges;
+}
+.y-label {
+  font-style: italic;
+  fill: #4d4d4d;
+}
+rect.legend-box {
+  fill: #f5f5f5;
+  stroke: #d9d9d9;
+  shape-rendering: crispEdges;
+}
+.legend text {
+  fill: #4d4d4d;
+  font-size: 14px;
+  text-transform: uppercase;
+  /*font-weight: bold;*/
+
+}
+text.legend-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+.tooltip {
+  line-height: 1.2em;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  max-width: 250px;
+  text-align: center;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.tooltip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+}
+/* Nrthward tooltips */
+.tooltip.n:after {
+  content: "\25BC";
+  margin: -3px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}

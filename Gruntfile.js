@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 
     rev: {
       files: {
-        src: ['build/**/*.{js,css,png,jpg}']
+        src: ['build/**/*.{js,css}']
       }
     },
 
