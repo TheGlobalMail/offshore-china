@@ -101,7 +101,7 @@ d3.csv 'data/percountry.csv', (err, csv) ->
 
 redraw = () ->
   w = Math.min(960, window.innerWidth) - margin.l - margin.r
-  h = Math.min(350, window.innerHeight) - margin.t - margin.b
+  h = Math.min(320, window.innerHeight) - margin.t - margin.b
 
   svg.attr({
     width: w + margin.l + margin.r,
