@@ -1,4 +1,4 @@
-margin = {t: 0, r: 40, b: 20, l:130}
+margin = {t: 0, r: 60, b: 20, l:130}
 x = d3.scale.ordinal()
 y = d3.scale.linear()
 stack = d3.layout.stack()
