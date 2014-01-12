@@ -2,9 +2,10 @@ margin = {t: 0, r: 40, b: 20, l:130}
 x = d3.scale.ordinal()
 y = d3.scale.linear()
 stack = d3.layout.stack()
-colors = d3.scale.ordinal().range(['#03A679', '#FD9F44', '#FC5C65'])
+#colors = d3.scale.ordinal().range(['#03A679', '#FD9F44', '#FC5C65'])
+colors = d3.scale.ordinal().range(['#2d5054', '#ccc2ab', '#6c8b87'])
 legendRectSize = 15
-formatPct = d3.format('.2p')
+formatPct = d3.format('.1%')
 formatNum = d3.format(',')
 
 svg = d3.select('#chart').append('svg')
@@ -31,7 +32,7 @@ yAxisSvg = wrapperG.append('g')
 tip = d3.tip().attr('class', 'tooltip')
   .direction('n')
   .offset([-8, 0])
-  .html((d) -> 
+  .html((d) ->
     if d.name isnt 'Other'
       '<p class="tooltip-p">Of ' + formatNum(d.total) + ' clients in <strong>' + d.region + '</strong>, <strong>' + formatPct(d.pct) + '</strong> used <strong>' + d.name + '</strong> as a tax haven.'
     else
@@ -101,7 +102,8 @@ d3.csv 'data/percountry.csv', (err, csv) ->
 
 redraw = () ->
   w = Math.min(960, window.innerWidth) - margin.l - margin.r
-  h = Math.min(320, window.innerHeight) - margin.t - margin.b
+  #h = Math.min(320, window.innerHeight) - margin.t - margin.b
+  h = Math.max(250, w/3)
 
   svg.attr({
     width: w + margin.l + margin.r,
@@ -109,7 +111,7 @@ redraw = () ->
   })
 
   y.range([0, w])
-  x.rangeRoundBands([h, 0], 0.2)
+  x.rangeRoundBands([h, 0], 0.25)
 
   xAxis.scale(x)
   yAxis.tickSize(-h, 0, 0).scale(y)
@@ -129,13 +131,13 @@ redraw = () ->
       })
 
   d3.select('.legend')
-    .attr('transform', 'translate(' + [w - 150, h - 110] + ')')
+    .attr('transform', 'translate(' + [w - 150, h - 100] + ')')
 
   svg.append('text')
     .attr({
       class: 'y-label'
-      transform: 'translate(' + [w - 10, h - 5] + ')'
+      transform: 'translate(' + [w - 100, h - 5] + ')'
     })
-    .text('No. of offshore clients')
+    .text('No. of entities with clients from region')
 
   svg.call(tip)
