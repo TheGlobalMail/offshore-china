@@ -2,7 +2,6 @@ margin = {t: 0, r: 40, b: 20, l:130}
 x = d3.scale.ordinal()
 y = d3.scale.linear()
 stack = d3.layout.stack()
-#colors = d3.scale.ordinal().range(['#03A679', '#FD9F44', '#FC5C65'])
 colors = d3.scale.ordinal().range(['#2d5054', '#ccc2ab', '#6c8b87'])
 legendRectSize = 15
 formatPct = d3.format('.1%')
@@ -101,8 +100,8 @@ d3.csv 'data/percountry.csv', (err, csv) ->
   redraw()
 
 redraw = () ->
-  w = Math.min(960, window.innerWidth) - margin.l - margin.r
-  #h = Math.min(320, window.innerHeight) - margin.t - margin.b
+  wrapperWidth = d3.select('#chart').style('width').match(/(\d+)px/)
+  w = Math.min(960, +wrapperWidth[1]) - margin.l - margin.r
   h = Math.max(250, w/3)
 
   svg.attr({
