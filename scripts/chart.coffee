@@ -136,8 +136,9 @@ redraw = () ->
   svg.append('text')
     .attr({
       class: 'y-label'
-      transform: 'translate(' + [w - 155, h - 5] + ')'
+      transform: 'translate(' + [w + 130, h - 5] + ')'
     })
+    .style('text-anchor', 'end')
     .text('No. of offshore entities with clients from region')
 
   svg.call(tip)
