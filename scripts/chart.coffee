@@ -33,9 +33,10 @@ tip = d3.tip().attr('class', 'tooltip')
   .offset([-8, 0])
   .html((d) ->
     if d.name isnt 'Other'
-      '<p class="tooltip-p">Of ' + formatNum(d.total) + ' clients in <strong>' + d.region + '</strong>, <strong>' + formatPct(d.pct) + '</strong> used <strong>' + d.name + '</strong> as a tax haven.'
+      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were from <strong>' + d.name + '</strong>.'
     else
-      '<p class="tooltip-p">Of ' + formatNum(d.total) + ' clients in <strong>' + d.region + '</strong>, <strong>' + formatPct(d.pct) + '</strong> used other tax havens.'
+      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were from <strong>other</strong> tax havens.'
+      #'<p class="tooltip-p">Of ' + formatNum(d.total) + ' clients in <strong>' + d.region + '</strong>, <strong>' + formatPct(d.pct) + '</strong> used other tax havens.'
     )
 
 d3.csv 'data/percountry.csv', (err, csv) ->
@@ -68,12 +69,12 @@ d3.csv 'data/percountry.csv', (err, csv) ->
   legendG = wrapperG.append('g').attr('class', 'legend')
   legendG.append('rect').attr({
     class: 'legend-box'
-    width: 160
+    width: 100
     height: 95
     y: -20
     x: -10
   })
-  legendG.append('text').attr('class', 'legend-title').text('China\'s tax havens')
+  legendG.append('text').attr('class', 'legend-title').text('Tax haven')
 
   legendGroups = legendG.selectAll('.legendGroup')
     .data(keys)
@@ -130,13 +131,13 @@ redraw = () ->
       })
 
   d3.select('.legend')
-    .attr('transform', 'translate(' + [w - 150, h - 100] + ')')
+    .attr('transform', 'translate(' + [w - 90, h - 100] + ')')
 
   svg.append('text')
     .attr({
       class: 'y-label'
-      transform: 'translate(' + [w - 100, h - 5] + ')'
+      transform: 'translate(' + [w - 155, h - 5] + ')'
     })
-    .text('No. of entities with clients from region')
+    .text('No. of offshore entities with clients from region')
 
   svg.call(tip)
