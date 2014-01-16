@@ -133,7 +133,7 @@ redraw = () ->
       })
 
   d3.select('.legend')
-    .attr('transform', 'translate(' + [w - 60, h - (x.rangeBand() * 2) + 10] + ')')
+    .attr('transform', 'translate(' + [w - 67, h - (x.rangeBand() * 2) + 10] + ')')
 
   d3.select('.y.axis .tick line').style('stroke-dasharray', '0 0')
 
