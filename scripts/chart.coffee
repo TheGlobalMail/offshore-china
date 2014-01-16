@@ -143,6 +143,6 @@ redraw = () ->
       transform: 'translate(' + [w + 110, h + 35] + ')'
     })
     .style('text-anchor', 'end')
-    .text('No. of offshore entities with clients from region')
+    .text('Number of offshore entities with clients from region')
 
   svg.call(tip)
