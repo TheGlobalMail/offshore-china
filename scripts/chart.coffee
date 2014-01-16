@@ -1,10 +1,10 @@
-margin = {t: 0, r: 60, b: 20, l:130}
+margin = {t: 0, r: 60, b: 40, l:110}
 x = d3.scale.ordinal()
 y = d3.scale.linear()
 stack = d3.layout.stack()
 colors = d3.scale.ordinal().range(['#2d5054', '#ccc2ab', '#6c8b87'])
 legendRectSize = 15
-formatPct = d3.format('.1%')
+formatPct = d3.format('%')
 formatNum = d3.format(',')
 
 svg = d3.select('#chart').append('svg')
@@ -33,9 +33,9 @@ tip = d3.tip().attr('class', 'tooltip')
   .offset([-8, 0])
   .html((d) ->
     if d.name isnt 'Other'
-      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were from <strong>' + d.name + '</strong>.'
+      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were incorporated in <strong>' + d.name + '</strong>.'
     else
-      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were from <strong>other</strong> tax havens.'
+      '<p class="tooltip-p"><strong>' + formatPct(d.pct) + '</strong> of the offshore entities with clients from <strong>' + d.region + '</strong> were incorporated in <strong>other</strong> tax havens.'
       #'<p class="tooltip-p">Of ' + formatNum(d.total) + ' clients in <strong>' + d.region + '</strong>, <strong>' + formatPct(d.pct) + '</strong> used other tax havens.'
     )
 
@@ -50,7 +50,8 @@ d3.csv 'data/percountry.csv', (err, csv) ->
   ))
 
   x.domain(csv.map((d) -> d.Region))
-  y.domain([0, d3.max(csv, (d) -> +d.Companies)])
+  #y.domain([0, d3.max(csv, (d) -> +d.Companies)])
+  y.domain([0, 16000])
 
   stackGroups = wrapperG.selectAll('.g-stack')
     .data(stackData)
@@ -103,7 +104,8 @@ d3.csv 'data/percountry.csv', (err, csv) ->
 redraw = () ->
   wrapperWidth = d3.select('#chart').style('width').match(/(\d+)px/)
   w = Math.min(960, +wrapperWidth[1]) - margin.l - margin.r
-  h = Math.max(250, w/3)
+  #h = Math.max(220, w/4)
+  h = 220
 
   svg.attr({
     width: w + margin.l + margin.r,
@@ -131,12 +133,14 @@ redraw = () ->
       })
 
   d3.select('.legend')
-    .attr('transform', 'translate(' + [w - 90, h - 100] + ')')
+    .attr('transform', 'translate(' + [w - 60, h - (x.rangeBand() * 2) + 10] + ')')
+
+  d3.select('.y.axis .tick line').style('stroke-dasharray', '0 0')
 
   svg.append('text')
     .attr({
       class: 'y-label'
-      transform: 'translate(' + [w + 130, h - 5] + ')'
+      transform: 'translate(' + [w + 110, h + 35] + ')'
     })
     .style('text-anchor', 'end')
     .text('No. of offshore entities with clients from region')
